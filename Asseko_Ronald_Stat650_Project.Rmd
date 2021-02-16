@@ -1,0 +1,380 @@
+---
+title: "Stat 650 Project"
+author: "Ronald Asseko-Messa"
+date: "October 13th, 2019"
+output: 
+  word_document: default
+  pdf_document: default
+---
+Loading packages
+```{r}
+library(pacman)
+p_load(tidyverse,knitr, readr, textreadr, forcats, skimr, nycflights13)
+```
+
+
+Loading the data
+```{r}
+
+On_Time_Reporting_Carrier1 <- read_csv('/Users/JaggerCes/Documents/Grad School/Fall 19/CSUEB/Stats 650 - Adv_R_for_Data_Sci/stat 650 project/On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2018_1.csv')
+
+On_Time_Reporting_Carrier2 <- read_csv('/Users/JaggerCes/Documents/Grad School/Fall 19/CSUEB/Stats 650 - Adv_R_for_Data_Sci/stat 650 project/On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2018_2.csv')
+
+On_Time_Reporting_Carrier3 <- read_csv("/Users/JaggerCes/Documents/Grad School/Fall 19/CSUEB/Stats 650 - Adv_R_for_Data_Sci/stat 650 project/On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2018_3.csv")
+
+On_Time_Reporting_Carrier4 <- read_csv("/Users/JaggerCes/Documents/Grad School/Fall 19/CSUEB/Stats 650 - Adv_R_for_Data_Sci/stat 650 project/On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2018_4.csv")
+
+On_Time_Reporting_Carrier5 <- read_csv("/Users/JaggerCes/Documents/Grad School/Fall 19/CSUEB/Stats 650 - Adv_R_for_Data_Sci/stat 650 project/On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2018_5.csv")
+
+On_Time_Reporting_Carrier6 <- read_csv("/Users/JaggerCes/Documents/Grad School/Fall 19/CSUEB/Stats 650 - Adv_R_for_Data_Sci/stat 650 project/On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2018_6.csv")
+
+On_Time_Reporting_Carrier7 <- read_csv("/Users/JaggerCes/Documents/Grad School/Fall 19/CSUEB/Stats 650 - Adv_R_for_Data_Sci/stat 650 project/On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2018_7.csv")
+
+On_Time_Reporting_Carrier8 <- read_csv("/Users/JaggerCes/Documents/Grad School/Fall 19/CSUEB/Stats 650 - Adv_R_for_Data_Sci/stat 650 project/On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2018_8.csv")
+
+On_Time_Reporting_Carrier9 <- read_csv("/Users/JaggerCes/Documents/Grad School/Fall 19/CSUEB/Stats 650 - Adv_R_for_Data_Sci/stat 650 project/On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2018_9.csv")
+
+On_Time_Reporting_Carrier10 <- read_csv("/Users/JaggerCes/Documents/Grad School/Fall 19/CSUEB/Stats 650 - Adv_R_for_Data_Sci/stat 650 project/On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2018_10.csv")
+
+On_Time_Reporting_Carrier11 <- read_csv("/Users/JaggerCes/Documents/Grad School/Fall 19/CSUEB/Stats 650 - Adv_R_for_Data_Sci/stat 650 project/On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2018_11.csv")
+
+On_Time_Reporting_Carrier12 <- read_csv("/Users/JaggerCes/Documents/Grad School/Fall 19/CSUEB/Stats 650 - Adv_R_for_Data_Sci/stat 650 project/On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2018_12.csv")
+
+```
+Checking what the head of the data looks like
+```{r}
+head(On_Time_Reporting_Carrier1)
+head(On_Time_Reporting_Carrier2)
+head(On_Time_Reporting_Carrier3)
+head(On_Time_Reporting_Carrier4)
+head(On_Time_Reporting_Carrier5)
+head(On_Time_Reporting_Carrier6)
+head(On_Time_Reporting_Carrier7)
+head(On_Time_Reporting_Carrier8)
+head(On_Time_Reporting_Carrier9)
+head(On_Time_Reporting_Carrier10)
+head(On_Time_Reporting_Carrier11)
+head(On_Time_Reporting_Carrier12)
+
+```
+
+Checking what the tail of the data looks like
+```{r}
+tail(On_Time_Reporting_Carrier1)
+tail(On_Time_Reporting_Carrier2)
+tail(On_Time_Reporting_Carrier3)
+tail(On_Time_Reporting_Carrier4)
+tail(On_Time_Reporting_Carrier5)
+tail(On_Time_Reporting_Carrier6)
+tail(On_Time_Reporting_Carrier7)
+tail(On_Time_Reporting_Carrier8)
+tail(On_Time_Reporting_Carrier9)
+tail(On_Time_Reporting_Carrier10)
+tail(On_Time_Reporting_Carrier11)
+tail(On_Time_Reporting_Carrier12)
+  
+```
+
+Changing type of FirstDepTime,  Div1WheelsOn, and Reporting_Airline
+
+```{r}
+
+On_Time_Reporting_Carrier1 <- On_Time_Reporting_Carrier1 %>% 
+  mutate(FirstDepTime = as.double(FirstDepTime), 
+         Div1WheelsOn = as.double(Div1WheelsOn), 
+         Reporting_Airline = as.character(Reporting_Airline), 
+         IATA_CODE_Reporting_Airline = as.character(IATA_CODE_Reporting_Airline),
+         Div1WheelsOff = as.double(Div1WheelsOff))
+
+On_Time_Reporting_Carrier2 <- On_Time_Reporting_Carrier2 %>%
+  mutate(FirstDepTime = as.double(FirstDepTime), 
+         Div1WheelsOn = as.double(Div1WheelsOn), 
+         Reporting_Airline = as.character(Reporting_Airline), 
+         IATA_CODE_Reporting_Airline = as.character(IATA_CODE_Reporting_Airline),
+         Div1WheelsOff = as.double(Div1WheelsOff))
+
+On_Time_Reporting_Carrier3 <- On_Time_Reporting_Carrier3 %>%
+  mutate(FirstDepTime = as.double(FirstDepTime), 
+         Div1WheelsOn = as.double(Div1WheelsOn), 
+         Reporting_Airline = as.character(Reporting_Airline), 
+         IATA_CODE_Reporting_Airline = as.character(IATA_CODE_Reporting_Airline),
+         Div1WheelsOff = as.double(Div1WheelsOff))
+         
+On_Time_Reporting_Carrier4 <- On_Time_Reporting_Carrier4 %>%
+  mutate(FirstDepTime = as.double(FirstDepTime), 
+         Div1WheelsOn = as.double(Div1WheelsOn), 
+         Reporting_Airline = as.character(Reporting_Airline), 
+         IATA_CODE_Reporting_Airline = as.character(IATA_CODE_Reporting_Airline),
+         Div1WheelsOff = as.double(Div1WheelsOff))
+
+On_Time_Reporting_Carrier5 <- On_Time_Reporting_Carrier5 %>%
+  mutate(FirstDepTime = as.double(FirstDepTime), 
+         Div1WheelsOn = as.double(Div1WheelsOn), 
+         Reporting_Airline = as.character(Reporting_Airline), 
+         IATA_CODE_Reporting_Airline = as.character(IATA_CODE_Reporting_Airline),
+         Div1WheelsOff = as.double(Div1WheelsOff))
+
+On_Time_Reporting_Carrier6 <- On_Time_Reporting_Carrier6 %>%
+  mutate(FirstDepTime = as.double(FirstDepTime), 
+         Div1WheelsOn = as.double(Div1WheelsOn), 
+         Reporting_Airline = as.character(Reporting_Airline), 
+         IATA_CODE_Reporting_Airline = as.character(IATA_CODE_Reporting_Airline),
+         Div1WheelsOff = as.double(Div1WheelsOff))
+
+On_Time_Reporting_Carrier7 <- On_Time_Reporting_Carrier7 %>%
+  mutate(FirstDepTime = as.double(FirstDepTime), 
+         Div1WheelsOn = as.double(Div1WheelsOn), 
+         Reporting_Airline = as.character(Reporting_Airline), 
+         IATA_CODE_Reporting_Airline = as.character(IATA_CODE_Reporting_Airline),
+         Div1WheelsOff = as.double(Div1WheelsOff))
+
+On_Time_Reporting_Carrier8 <- On_Time_Reporting_Carrier8 %>%
+  mutate(FirstDepTime = as.double(FirstDepTime), 
+         Div1WheelsOn = as.double(Div1WheelsOn), 
+         Reporting_Airline = as.character(Reporting_Airline), 
+         IATA_CODE_Reporting_Airline = as.character(IATA_CODE_Reporting_Airline),
+         Div1WheelsOff = as.double(Div1WheelsOff))
+         
+On_Time_Reporting_Carrier9 <- On_Time_Reporting_Carrier9 %>%
+  mutate(FirstDepTime = as.double(FirstDepTime), 
+         Div1WheelsOn = as.double(Div1WheelsOn), 
+         Reporting_Airline = as.character(Reporting_Airline), 
+         IATA_CODE_Reporting_Airline = as.character(IATA_CODE_Reporting_Airline),
+         Div1WheelsOff = as.double(Div1WheelsOff))
+
+On_Time_Reporting_Carrier10 <- On_Time_Reporting_Carrier10 %>%
+  mutate(FirstDepTime = as.double(FirstDepTime), 
+         Div1WheelsOn = as.double(Div1WheelsOn), 
+         Reporting_Airline = as.character(Reporting_Airline), 
+         IATA_CODE_Reporting_Airline = as.character(IATA_CODE_Reporting_Airline),
+         Div1WheelsOff = as.double(Div1WheelsOff))
+
+On_Time_Reporting_Carrier11 <- On_Time_Reporting_Carrier11 %>%
+  mutate(FirstDepTime = as.double(FirstDepTime), 
+         Div1WheelsOn = as.double(Div1WheelsOn), 
+         Reporting_Airline = as.character(Reporting_Airline), 
+         IATA_CODE_Reporting_Airline = as.character(IATA_CODE_Reporting_Airline),
+         Div1WheelsOff = as.double(Div1WheelsOff))
+
+On_Time_Reporting_Carrier12 <- On_Time_Reporting_Carrier12 %>%
+  mutate(FirstDepTime = as.double(FirstDepTime), 
+         Div1WheelsOn = as.double(Div1WheelsOn), 
+         Reporting_Airline = as.character(Reporting_Airline), 
+         IATA_CODE_Reporting_Airline = as.character(IATA_CODE_Reporting_Airline),
+         Div1WheelsOff = as.double(Div1WheelsOff))
+
+```
+
+2. Merging the 12 files
+
+```{r}
+my_flights <- bind_rows(On_Time_Reporting_Carrier1, On_Time_Reporting_Carrier2, On_Time_Reporting_Carrier3, On_Time_Reporting_Carrier4, On_Time_Reporting_Carrier5, On_Time_Reporting_Carrier6, On_Time_Reporting_Carrier7, On_Time_Reporting_Carrier8, On_Time_Reporting_Carrier9, On_Time_Reporting_Carrier10, On_Time_Reporting_Carrier11, On_Time_Reporting_Carrier12)
+
+head(my_flights)
+```
+
+There were 22,606 flights that flew from the Bay Area in January 2018. 4194 from OAK, 14135 from SFO and 4277 from SJC
+```{r}
+bay_flights1 <- my_flights %>% 
+  filter(Month == 1, Origin == "SFO" | Origin == "OAK" | Origin == "SJC")
+
+bay_flights1 %>% count()
+
+bay_flights1 %>%
+  group_by(Year, Month, Origin) %>%
+  count()
+
+```
+
+
+
+```{r}
+??nycflights13::flights
+
+nycflights13_names <- tribble(
+~columns, ~description,
+'year', 'Date of departure. - year',
+'month', 'Date of departure. - month',
+'day', 'Date of departure.',
+'dep_time', 'Actual departure and arrival times (format HHMM or HMM), local tz.',
+'arr_time', 'Actual departure and arrival times (format HHMM or HMM), local tz.',
+'sched_dep_time', 'Scheduled departure and arrival times (format HHMM or HMM), local tz.',
+'sched_arr_time', 'Scheduled departure and arrival times (format HHMM or HMM), local tz.',
+'dep_delay', 'Departure and arrival delays, in minutes. Negative times represent early departures/arrivals.',
+'arr_delay', 'Departure and arrival delays, in minutes. Negative times represent early departures/arrivals.',
+'carrier', 'Two letter carrier abbreviation. See airlines to get name.',
+'flight', 'Flight number.',
+'tailnum', 'Plane tail number. See planes for additional metadata.',
+'origin', 'Origin and destination. See airports for additional metadata.',
+'dest', 'Origin and destination. See airports for additional metadata.',
+'air_time', 'Amount of time spent in the air, in minutes.',
+'distance', 'Distance between airports, in miles.',
+'hour', 'Time of scheduled departure broken into hour and minutes. - hour',
+'minute', 'Time of scheduled departure broken into hour and minutes. minute',
+'time_hour', 'Scheduled date and hour of the flight as a POSIXct date. Along with origin, can be used to join flights data to weather data.'
+)
+
+kable(nycflights13_names)
+
+```
+reading the Readme file
+```{r}
+
+X <- read_html("/Users/JaggerCes/Documents/Grad School/Fall 19/CSUEB/Stats 650 - Adv_R_for_Data_Sci/stat 650 project/readme.html")
+X
+#removing the top 4 lines
+X <- X[-c(1,2,3,4)]
+head(X)
+```
+creating a matrix for the variable names in the firstcolumn and description in the second
+```{r}
+Y <- matrix(X[1:218], ncol = 2, byrow = TRUE)
+head(Y)
+```
+Putting the matrix in tibble
+```{r}
+on_time_names <- tibble(columns = Y[,1], description = Y[,2]) %>% 
+  mutate(columns = tolower(columns))
+
+head(on_time_names)
+```
+
+```{r}
+nycflights13_names <- nycflights13_names %>% 
+  mutate(columns = as_factor(columns))
+
+#listing variables in nycflights13
+nycflights13_names$columns %>% levels()
+
+#number of variables in nycflights13
+nycflights13_names$columns %>% nlevels()
+```
+Renaming variables in nycflights13
+```{r}
+nycflights13_names$columns <- nycflights13_names$columns %>%
+  fct_recode("dayofmonth" = "day",
+             "deptime" = "dep_time",
+             "arrtime" = "arr_time",
+             "crsdeptime" = "sched_dep_time",
+             "crsarrtime" = "sched_arr_time",
+             "depdelay" = "dep_delay",
+             "arrdelay" = "arr_delay",
+             "reporting_airline" = "carrier",
+             "flight_number_reporting_airline" = "flight",
+             "tail_number"= "tailnum",
+             "airtime" = "air_time",
+             "crsdeptime" = "time_hour"
+)
+
+head(nycflights13_names)
+```
+3. Matching variables.
+
+```{r}
+match <- inner_join(nycflights13_names, on_time_names, "columns")
+head(match)
+```
+Variables not in the On-Time data.
+
+```{r}
+anti_join(nycflights13_names, on_time_names, "columns")
+```
+
+Question 4: Variables not in the nycflights13 data
+```{r}
+new_vars <- anti_join(on_time_names, nycflights13_names, "columns")
+
+new_vars_tibbles <- tibble(columns = new_vars$columns, description = new_vars$description)
+head(new_vars_tibbles, 10)
+```
+
+Problem 5: Excercise 4.2
+The data provides two ways of checking for cancelled flights. Cancelled and missing data on arrival (ArrDelay). Yet Cancelled reports that no flights that departed from either SFO, OAK, or SJC  were cancelled in Feb, Apr, Jun, Sep, Oct, and Nov 2018. This seems very unusual, which is why I'd  use the missing data in ArrDelay. Thus August had the highest proportion of cancelled fights, and February had the lowest. This suggests that both the volume and weather have a big effect on cancelled flights in the Bay-Area.
+
+```{r}
+sfoflights18 <- my_flights %>% 
+  filter(Origin == "SFO" | Origin == "OAK" | Origin == "SJC") 
+head(sfoflights18)
+
+#flights that were reported cancelled
+sfoflights18 %>% group_by(Cancelled, Month) %>%
+  filter(Cancelled == 1) %>%
+  count() %>%
+  arrange(desc(n))
+
+#flights that that were missing arrival data and could thus be considered cancelled 
+sfoflights18 %>% group_by(ArrDelay, Month) %>%
+  filter(is.na(ArrDelay)) %>%
+  count() %>%
+  arrange(desc(n))
+
+
+```
+Problem 5: Excercise 4.3 Tail number of the plan with the most flights from the Bay-Area N286VA.
+
+```{r}
+sfoflights18 %>% select(Tail_Number) %>%
+  group_by(Tail_Number) %>%
+  count() %>%
+  arrange(desc(n))
+```
+Plot the number of trips per week over the year.
+```{r}
+sfoflights18 %>% select(Year, Month, DayofMonth, Tail_Number) %>%
+  filter(Tail_Number == "N286VA") %>%
+  group_by(Year, Month) %>%
+  summarize(count=n())
+
+
+sfoflights18 %>% filter(Tail_Number == "N286VA") %>%
+  group_by(Month) %>%
+  tally() %>%
+  ggplot(aes(x = as.factor(Month), y = n)) +
+  geom_point() +
+  geom_line()
+
+flights2 <- sfoflights18 %>% mutate( ymd = as.Date(paste(Year, Month, DayofMonth, sep='-'))) %>%
+  mutate( Week = as.integer(format(as.Date(ymd), "%U"))  ) %>% 
+  filter(Tail_Number == "N286VA") %>%
+  group_by(Week) %>%
+  tally()
+
+flights2
+
+flights2 %>% ggplot(aes(x=Week, y=n)) +
+  geom_point() +
+  geom_line() +
+  geom_smooth()
+```
+
+Problem 5: Excercise 4.4
+The oldest plane flying from the Bay-Area in 2018 was the N505UA and it was manufactured in 1989.
+```{r}
+
+planes2 <- planes %>% rename( year_m = year )
+
+planes2
+
+planes2 %>% inner_join(sfoflights18, by = c("tailnum" = "Tail_Number")) %>%
+  group_by(tailnum, year_m, Year) %>%
+  count() %>%
+  arrange(year_m)
+
+```
+There were 260 planes that flew from the Bay-Area and are included in the planes table?
+
+```{r}
+C <- sfoflights18 %>% inner_join(planes2, by = c("Tail_Number" = "tailnum")) %>%
+  group_by(Tail_Number) %>%
+  count()
+
+num_planes = n_distinct(C$n)
+num_planes
+```
+Taking a sample of 100,000 rows
+```{r}
+sample_100k <- sfoflights18 %>%
+  sample(100000:nrow(sfoflights18), 110)
+sample_100k
+```
+
